@@ -1,0 +1,25 @@
+# CVs uploadés — données personnelles des candidats
+uploads/*
+!uploads/.htaccess
+!uploads/index.php
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+env/
+
+# Fichiers sensibles avec vrais mots de passe
+config.php
+mailer.php
+
+# Dossier Composer
+vendor/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers de test
+test_flask.php

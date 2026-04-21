@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+:root {
+    --dark:    #161514;
+    --orange:  #F67011;
+    --brown:   #873800;
+    --slate:   #262626;
+    --grey:    #878787;
+    --peach:   #FFE4D0;
+    --white:   #FFFFFF;
+    --red:     #ff4d4d;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Halo décoratif */
+body::before {
+    content:'';
+    position:fixed; top:-220px; right:-220px;
+    width:560px; height:560px;
+    background: radial-gradient(circle, rgba(246,112,17,.14) 0%, transparent 68%);
+    pointer-events:none;
+}
+body::after {
+    content:'';
+    position:fixed; bottom:-160px; left:-160px;
+    width:420px; height:420px;
+    background: radial-gradient(circle, rgba(135,56,0,.1) 0%, transparent 68%);
+    pointer-events:none;
+}
+
+.card {
+    background: var(--slate);
+    border: 1px solid rgba(246,112,17,.18);
+    border-radius: 22px;
+    padding: 50px 46px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 32px 80px rgba(0,0,0,.55);
+    animation: up .45s ease forwards;
+}
+@keyframes up {
+    from { opacity:0; transform:translateY(22px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+/* barre orange haut */
+.card::before {
+    content:'';
+    position:absolute; top:0; left:46px; right:46px;
+    height:3px;
+    background: linear-gradient(90deg, var(--orange), var(--brown));
+    border-radius:0 0 4px 4px;
+}
+
+h1 {
+    text-align:center;
+    font-family:'Syne',sans-serif;
+    font-size:30px; font-weight:800;
+    color:var(--white); letter-spacing:-1px;
+    margin-bottom:5px;
+}
+h1 .ia { color:var(--orange); }
+
+.sub {
+    text-align:center; color:var(--grey);
+    font-size:13px; margin-bottom:34px;
+}
+
+/* Tabs */
+.tabs {
+    display:flex; background:var(--dark);
+    padding:4px; border-radius:12px;
+    margin-bottom:28px; gap:4px;
+}
+.tab {
+    flex:1; padding:10px 12px;
+    text-align:center; font-size:13.5px; font-weight:600;
+    font-family:'DM Sans',sans-serif;
+    color:var(--grey); background:transparent;
+    cursor:pointer; border:none; border-radius:8px;
+    transition: all .22s;
+}
+.tab.on {
+    background:var(--orange); color:var(--white);
+    box-shadow:0 4px 16px rgba(246,112,17,.38);
+}
+.tab:hover:not(.on) { color:var(--peach); }
+
+label {
+    display:block; font-size:11px; font-weight:700;
+    color:var(--grey); margin-bottom:7px;
+    text-transform:uppercase; letter-spacing:.9px;
+}
+
+input {
+    width:100%; padding:13px 16px;
+    background:var(--dark);
+    border:1.5px solid rgba(135,135,135,.22);
+    border-radius:10px; font-size:14.5px;
+    font-family:'DM Sans',sans-serif;
+    color:var(--peach); outline:none;
+    margin-bottom:18px; transition:all .22s;
+}
+input:focus {
+    border-color:var(--orange);
+    box-shadow:0 0 0 4px rgba(246,112,17,.1);
+}
+input::placeholder { color:rgba(135,135,135,.45); }
+
+.btn {
+    width:100%; padding:14px;
+    background:linear-gradient(135deg, var(--orange), var(--brown));
+    color:var(--white); border:none; border-radius:11px;
+    font-size:15px; font-family:'Syne',sans-serif;
+    font-weight:700; letter-spacing:.4px; cursor:pointer;
+    transition:all .28s;
+    box-shadow:0 8px 24px rgba(246,112,17,.34);
+    margin-top:4px;
+}
+.btn:hover { transform:translateY(-2px); box-shadow:0 14px 34px rgba(246,112,17,.5); }
+.btn:active { transform:translateY(0); }
+
+.err {
+    background:rgba(255,77,77,.1); border:1px solid rgba(255,77,77,.28);
+    color:#ff8c8c; padding:12px 16px; border-radius:10px;
+    font-size:13px; margin-bottom:18px;
+}
+
+.bas {
+    text-align:center; margin-top:24px;
+    font-size:13.5px; color:var(--grey);
+}
+.bas a { color:var(--orange); text-decoration:none; font-weight:600; }
+.bas a:hover { color:var(--peach); }
+
+#code-recruteur-box { margin-bottom:2px; }
