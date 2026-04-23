@@ -29,21 +29,23 @@ function getDB()
     static $pdo = null;
     if ($pdo === null) {
         try {
-            // Construction du DSN avec le port interne 3306
             $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
             
+            // On enlève MYSQL_ATTR_INIT_COMMAND d'ici pour éviter l'avertissement
             $pdo = new PDO(
                 $dsn,
                 DB_USER,
                 DB_PASS,
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
                 ]
             );
+
+            // On exécute la commande de charset séparément
+            $pdo->exec("SET NAMES utf8mb4");
+
         } catch (PDOException $e) {
-            // Affichage de l'erreur précise pour le debug
             die("Erreur de connexion interne : " . $e->getMessage());
         }
     }
