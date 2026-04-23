@@ -16,69 +16,53 @@ define('IA_SERVICE_URL', 'http://localhost:5000');
 
 define('UPLOAD_DIR', __DIR__ . '/uploads/');
 
-/**
- * Initialise et retourne la connexion PDO
- */
+
 function getDB()
 {
     static $pdo = null;
     if ($pdo === null) {
         try {
-            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4";
             $pdo = new PDO(
-                $dsn,
+                "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
                 DB_USER,
                 DB_PASS,
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
                 ]
             );
         } catch (PDOException $e) {
-            // Affichage propre de l'erreur
-            die('<div style="font-family:Arial;padding:20px;color:red;border:1px solid red;background:#fff5f5;">
-                <h3 style="margin-top:0;">Erreur de connexion à la base de données Railway</h3>
-                <p><b>Détail :</b> ' . htmlspecialchars($e->getMessage()) . '</p>
-                <p><i>Note : Si l\'erreur est "could not find driver", activez <b>extension=pdo_mysql</b> dans votre php.ini de XAMPP.</i></p>
-            </div>');
+            die('<div style="font-family:Arial;padding:20px;color:red;">
+                <b>Erreur connexion DB :</b> ' . $e->getMessage() . '<br>
+                Vérifiez config.php et que la base <b>cvmatch_ia</b> existe.</div>');
         }
     }
     return $pdo;
 }
 
-// Initialisation de la session
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE)
     session_start();
-}
 
-// --- Fonctions utilitaires ---
-
-function estConnecte() {
+function estConnecte()
+{
     return isset($_SESSION['user_id']);
 }
-
-function estCandidat() {
+function estCandidat()
+{
     return isset($_SESSION['role']) && $_SESSION['role'] === 'candidat';
 }
-
-function estRecruteur() {
+function estRecruteur()
+{
     return isset($_SESSION['role']) && $_SESSION['role'] === 'recruteur';
 }
-
-function rediriger($url) {
-    if (!headers_sent()) {
-        header("Location: $url");
-    } else {
-        echo '<script>window.location.href="' . $url . '";</script>';
-    }
+function rediriger($url)
+{
+    ob_end_clean();
+    header("Location: $url");
     exit();
 }
-
-/**
- * Sécurise les données de sortie (XSS)
- */
-function s($v) {
-    return htmlspecialchars(trim((string)$v), ENT_QUOTES, 'UTF-8');
+function s($v)
+{
+    return htmlspecialchars(trim((string) $v), ENT_QUOTES, 'UTF-8');
 }
 ?>
