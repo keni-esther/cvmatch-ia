@@ -1,44 +1,51 @@
+
 <?php
 // ============================================
 // CVMatch IA - Configuration (Connexion Railway)
 // ============================================
 
-// Configuration des accès Railway
-define('DB_HOST', 'mysql.railway.internal:30673'); // Adresse publique + Port
+// Configuration des accès Railway (Extraits de ta commande MySQL)
+define('DB_HOST', 'shortline.proxy.rlwy.net'); // L'hôte uniquement
+define('DB_PORT', '30673');                   // Le port séparé
 define('DB_USER', 'root');
 define('DB_PASS', 'agLVoiIdQJqDpDycdpHSWsDRqeWwrrvB');
-define('DB_NAME', 'railway'); // Nom de la base sur Railway
+define('DB_NAME', 'railway'); 
 
 define('CODE_RECRUTEUR', 'RECRUT2024');
 
-// URL de ton service Python/IA (à modifier si tu héberges l'IA sur Railway aussi)
+// URL de ton service Python/IA
 define('IA_SERVICE_URL', 'http://localhost:5000');
 
 define('UPLOAD_DIR', __DIR__ . '/uploads/');
-
 
 function getDB()
 {
     static $pdo = null;
     if ($pdo === null) {
         try {
+            // Modification ici : ajout du paramètre port dans le DSN
+            $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
+            
             $pdo = new PDO(
-                "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
+                $dsn,
                 DB_USER,
                 DB_PASS,
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
                 ]
             );
         } catch (PDOException $e) {
             die('<div style="font-family:Arial;padding:20px;color:red;">
-                <b>Erreur connexion DB :</b> ' . $e->getMessage() . '<br>
-                Vérifiez config.php et que la base <b>cvmatch_ia</b> existe.</div>');
+                <b>Erreur connexion Railway :</b> ' . $e->getMessage() . '<br>
+                Vérifiez que votre IP est autorisée sur Railway ou que les identifiants sont à jour.</div>');
         }
     }
     return $pdo;
 }
+
+// Le reste de tes fonctions (session_start, estConnecte, etc.) ne change pas...
 
 if (session_status() === PHP_SESSION_NONE)
     session_start();
