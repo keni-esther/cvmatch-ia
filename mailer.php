@@ -3,8 +3,8 @@
 // CVMatch IA - Envoi Gmail SMTP pur PHP
 // ============================================
 
-define('GMAIL_USER', 'VOTRE_ADRESSE_GMAIL');
-define('GMAIL_PASS', 'VOTRE_MOT_DE_PASSE_GMAIL');
+define('GMAIL_USER', 'keniesther67@gmail.com');
+define('GMAIL_PASS', 'nvlmcvucmfutrxhh');
 define('GMAIL_FROM_NAME', 'CVMatch IA');
 
 function envoyerEmail($destinataire, $sujet, $corps_html, $replyTo = null)
