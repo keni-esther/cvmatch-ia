@@ -27,28 +27,28 @@ function getDB()
     static $pdo = null;
     if ($pdo === null) {
         try {
-            // Modification ici : ajout du paramètre port dans le DSN
             $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
             
+            // On retire la constante problématique du tableau d'options
             $pdo = new PDO(
                 $dsn,
                 DB_USER,
                 DB_PASS,
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
                 ]
             );
+
+            // On force le charset manuellement après la connexion
+            $pdo->exec("SET NAMES utf8mb4");
+
         } catch (PDOException $e) {
-            die('<div style="font-family:Arial;padding:20px;color:red;">
-                <b>Erreur connexion Railway :</b> ' . $e->getMessage() . '<br>
-                Vérifiez que votre IP est autorisée sur Railway ou que les identifiants sont à jour.</div>');
+            die('Erreur connexion : ' . $e->getMessage());
         }
     }
     return $pdo;
 }
-
 // Le reste de tes fonctions (session_start, estConnecte, etc.) ne change pas...
 
 if (session_status() === PHP_SESSION_NONE)
