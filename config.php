@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 // ============================================
 
 // Configuration des accès Railway (Extraits de ta commande MySQL)
-define('DB_HOST', 'shortline.proxy.rlwy.net'); // L'hôte uniquement
+define('DB_HOST', 'mysql.railway.internal'); // L'hôte uniquement
 define('DB_PORT', '30673');                   // Le port séparé
 define('DB_USER', 'root');
 define('DB_PASS', 'agLVoiIdQJqDpDycdpHSWsDRqeWwrrvB');
