@@ -4,7 +4,7 @@
 // ============================================
 
 // Configuration des accès Railway
-define('DB_HOST', 'shortline.proxy.rlwy.net:30673'); // Adresse publique + Port
+define('DB_HOST', 'mysql.railway.internal:30673'); // Adresse publique + Port
 define('DB_USER', 'root');
 define('DB_PASS', 'agLVoiIdQJqDpDycdpHSWsDRqeWwrrvB');
 define('DB_NAME', 'railway'); // Nom de la base sur Railway
