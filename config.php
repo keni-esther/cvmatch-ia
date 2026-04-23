@@ -8,18 +8,20 @@ error_reporting(E_ALL);
 // CVMatch IA - Configuration (Connexion Railway)
 // ============================================
 
-// Configuration des accès Railway (Extraits de ta commande MySQL)
-define('DB_HOST', 'mysql.railway.internal'); // L'hôte uniquement
-define('DB_PORT', '30673');                   // Le port séparé
+
+// ============================================
+// CVMatch IA - Configuration INTERNE Railway
+// ============================================
+
+// On utilise l'hôte interne (Network interne de Railway)
+define('DB_HOST', 'mysql.railway.internal'); 
+define('DB_PORT', '3306'); // EN INTERNE, LE PORT EST TOUJOURS 3306
 define('DB_USER', 'root');
 define('DB_PASS', 'agLVoiIdQJqDpDycdpHSWsDRqeWwrrvB');
 define('DB_NAME', 'railway'); 
 
 define('CODE_RECRUTEUR', 'RECRUT2024');
-
-// URL de ton service Python/IA
 define('IA_SERVICE_URL', 'http://localhost:5000');
-
 define('UPLOAD_DIR', __DIR__ . '/uploads/');
 
 function getDB()
@@ -27,28 +29,28 @@ function getDB()
     static $pdo = null;
     if ($pdo === null) {
         try {
+            // Construction du DSN avec le port interne 3306
             $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
             
-            // On retire la constante problématique du tableau d'options
             $pdo = new PDO(
                 $dsn,
                 DB_USER,
                 DB_PASS,
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
                 ]
             );
-
-            // On force le charset manuellement après la connexion
-            $pdo->exec("SET NAMES utf8mb4");
-
         } catch (PDOException $e) {
-            die('Erreur connexion : ' . $e->getMessage());
+            // Affichage de l'erreur précise pour le debug
+            die("Erreur de connexion interne : " . $e->getMessage());
         }
     }
     return $pdo;
 }
+
+// ... reste de tes fonctions ...
 // Le reste de tes fonctions (session_start, estConnecte, etc.) ne change pas...
 
 if (session_status() === PHP_SESSION_NONE)
