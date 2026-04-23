@@ -4,7 +4,7 @@ if (!file_exists('config.php')) {
     $fichiers = scandir(__DIR__);
     die("ERREUR CRITIQUE : config.php introuvable. Fichiers vus par le serveur : " . implode(', ', $fichiers));
 }
-require_once("config.php");
+require_once __DIR__ . "/../config.php";
 
 if (estConnecte()) {
     rediriger(estRecruteur() ? 'dashboard_recruteur.php' : 'dashboard_candidat.php');
