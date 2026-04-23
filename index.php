@@ -1,4 +1,9 @@
 <?php
+
+if (!file_exists('config.php')) {
+    $fichiers = scandir(__DIR__);
+    die("ERREUR CRITIQUE : config.php introuvable. Fichiers vus par le serveur : " . implode(', ', $fichiers));
+}
 require_once 'config.php';
 
 if (estConnecte()) {
