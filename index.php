@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+require_once 'config.php';
 
 if (estConnecte()) {
     rediriger(estRecruteur() ? 'dashboard_recruteur.php' : 'dashboard_candidat.php');
