@@ -3,10 +3,10 @@
 // CVMatch IA - Configuration
 // ============================================
 
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'shortline.proxy.rlwy.net');
 define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'cvmatch_ia');
+define('DB_PASS', 'agLVoiIdQJqDpDycdpHSWsDRqeWwrrvB');
+define('DB_NAME', 'railway');
 
 define('CODE_RECRUTEUR', 'RECRUT2024');
 
