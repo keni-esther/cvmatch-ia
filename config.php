@@ -3,12 +3,13 @@
 // CVMatch IA - Configuration
 // ============================================
 
-define('DB_HOST', 'localhost');
-define('DB_USER', 'VOTRE_USER_DB');        // ← à remplacer
-define('DB_PASS', 'VOTRE_MOT_DE_PASSE');   // ← à remplacer
-define('DB_NAME', 'VOTRE_NOM_BDD');        // ← à remplacer
 
-define('CODE_RECRUTEUR', 'VOTRE_CODE_SECRET'); // ← à remplacer
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'cvmatch_ia');
+
+define('CODE_RECRUTEUR', 'RECRUT2024');
 
 define('IA_SERVICE_URL', 'http://localhost:5000');
 
