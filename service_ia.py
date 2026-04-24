@@ -15,10 +15,10 @@ from docx import Document
 app = Flask(__name__)
 
 DB_CONFIG = {
-    'host': 'localhost',
+    'host': 'mysql.railway.internal',
     'user': 'root',
-    'password': '',
-    'database': 'cvmatch_ia',
+    'password': 'agLVoiIdQJqDpDycdpHSWsDRqeWwrrvB',
+    'database': 'railway',
     'charset': 'utf8mb4'
 }
 
