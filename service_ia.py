@@ -280,13 +280,6 @@ def matching():
     return jsonify({'resultats': resultats[:15], 'total': len(resultats)})
 
 
-if __name__ == '__main__':
-    os.makedirs(UPLOADS_DIR, exist_ok=True)
-    os.makedirs(CVS_POOL_DIR, exist_ok=True)
-    print('=' * 55)
-    print('  CVMatch IA — Microservice Flask :5000')
-    print('=' * 55)
-    app.run(host='0.0.0.0', port=5000, debug=True)
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
