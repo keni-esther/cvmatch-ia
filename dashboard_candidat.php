@@ -69,6 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $filename = 'cv_' . $cid . '_' . time() . '.' . $ext;
             $dest = UPLOAD_DIR . $filename;
+            if (!file_exists(UPLOAD_DIR)) {
+                 mkdir(UPLOAD_DIR, 0777, true);
+                }
             if (move_uploaded_file($_FILES['cv']['tmp_name'], $dest)) {
                 // Mettre à jour ou insérer dans cv_fichiers
                 $existing = $db->prepare("SELECT id FROM cv_fichiers WHERE candidat_id = ?");
