@@ -15,14 +15,15 @@ from docx import Document
 app = Flask(__name__)
 
 DB_CONFIG = {
-    'host': 'mysql.railway.internal',
-    'user': 'root',
-    'password': 'agLVoiIdQJqDpDycdpHSWsDRqeWwrrvB',
-    'database': 'railway',
+    'host': os.getenv("DB_HOST", "mysql.railway.internal"),
+    'user': os.getenv("DB_USER", "root"),
+    'password': os.getenv("DB_PASS", "agLVoiIdQJqDpDycdpHSWsDRqeWwrrvB"),
+    'database': os.getenv("DB_NAME", "railway"),
     'charset': 'utf8mb4'
 }
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
+BASE_DIR = os.path.abspath(os.path.dirname(__file__)) 
 UPLOADS_DIR = os.path.join(BASE_DIR, 'uploads')
 CVS_POOL_DIR = os.path.join(BASE_DIR, 'cvs_pool')
 
@@ -286,3 +287,8 @@ if __name__ == '__main__':
     print('  CVMatch IA — Microservice Flask :5000')
     print('=' * 55)
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+
