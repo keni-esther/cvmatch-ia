@@ -142,6 +142,13 @@ def analyze_folder(folder, source_name, req_tokens):
         })
 
     return results
+    
+@app.route('/')
+def home():
+    return jsonify({
+        "message": "CVMatch IA Microservice is running",
+        "endpoints": ["/ping", "/health", "/matching (POST)"]
+    })
 
 
 @app.route('/ping')
