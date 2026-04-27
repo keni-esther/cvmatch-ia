@@ -1,1 +1,1 @@
-web: python service_ia.py
+web: python3 service_ia.py
